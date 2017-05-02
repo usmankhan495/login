@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Sign In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+   <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
+    <link rel="stylesheet" href="themes/Bootstrap.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile.structure-1.4.0.min.css" />
+    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    
+    
+    <script>
+    
+        
+                   window.onload=function()
+{
+    var config = {
+                apiKey: "AIzaSyBaLbULub3JwEAhdmQHTZVa_HnkfKy8VEI",
+                authDomain: "mydb-d6d9b.firebaseapp.com",
+                databaseURL: "https://mydb-d6d9b.firebaseio.com",
+                projectId: "mydb-d6d9b",
+                storageBucket: "mydb-d6d9b.appspot.com",
+                messagingSenderId: "293138017180"
+            };
+            
+            firebase.initializeApp(config);
+
+              
+
+                   }
+          
+            
+        
+       // window.onload=init;
+    
+        
+        
+        function register()
+        {
+            
+            
+            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
+            
+            var ref=firebase.database.ref();
+            
+              //ref.set()
+            
+            
+        }
+
+function login()
+{
+    var check=false;
+    var useraName;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("pass").value;
+    
+     if (email=='' || password=='') {
+              alert("Please enter values");
+            return;
+            //console.log('email and password required');
+          }
+   // alert("login tt")
+          // Sign in user
+    firebase.auth().signInWithEmailAndPassword(email, password).then(function(firebaseUser) {
+        console.log(firebaseUser.emailVerified+"  "+firebaseUser.email+"  "+firebaseUser.uid);
+        console.log(firebaseUser);
+       // location.href="home.html";
+    }).catch(function(error) {
+//  // Handle Errors here.
+        check=true;
+        var errorCode = error.code;
+        var errorMessage = error.message;
+       // if(check==true)
+        {
+            alert(errorMessage+"  "+ errorCode);
+        }
+
+        //return;
+//  // ...
+    });
+
+//var ref= firebase.database().ref("Auth").once('value').then(function(snapshot) {
+
+
+
+    //email=email.replace(".","dot");
+    //var a=snapshot.val();
+   // var ke=;
+
+  //  snapshot.forEach(function(child)
+  //  {
+       // if(email==child.key)
+        {
+
+          //  var storage = window.localStorage;
+          //  storage.setItem("userName",child.val().toString());
+          //  console.log(storage.getItem("userName")+"  user "+child.val().toString());
+        }
+        //console.log(child.key);
+   // });
+
+
+  // });
+    //location.href="home.html";
+
+    var storage = window.localStorage;
+    //storage.setItem("productKey",productKey[index].toString());
+
+   // console.log(storage.getItem("userName"));
+   //location.href="home.html";
+    
+    
+             // firebase.auth().onAuthStateChanged(function(user) {
+  //if (user) {
+   // alert("user is sign in");
+  //} else {
+    // No user is signed in.
+  //}
+//});
+    
+   // alert("Login successfull");
+    
+   // location.href="register.html"
+           // firebase.auth().createUserWithEmailAndPassword(email, password);
+           // window.location = "chat.html"; 
+    
+}
+    
+    
+    </script>
+    
+
+</head>
+
+<body>
+
+    <div data-role="page" data-theme="c">
+
+        <div data-role="header" >
+
+            <h1>SellBid</h1>
+
+        </div><!-- /header -->
+
+        <div role="main" class="ui-content">
+
+            <h3 align="center">Sign In</h3>
+
+
+
+            <input type="text" placeholder="Email" name="txt-email" id="email" value=""><br>
+
+
+
+            <input type="password" placeholder="Password" name="txt-password" id="pass" value="">
+
+            <fieldset data-role="controlgroup">
+
+                <input type="checkbox" name="chck-rememberme" id="chck-rememberme" checked="">
+
+                <label for="chck-rememberme">Remember me</label>
+
+            </fieldset>
+
+           <button id="submit" type="button" onclick="login()">Login</button>
+
+            <p class="mc-top-margin-1-5"><a href="#">Can't access your account?</a></p>
+
+            <div data-role="popup" id="dlg-invalid-credentials" data-dismissible="false" style="max-width:400px;">
+
+                <div role="main" class="ui-content">
+
+                    <h3 class="mc-text-danger">Login Failed</h3>
+
+                    <p>Did you enter the right credentials?</p>
+
+                    <div class="mc-text-center"><a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a></div>
+
+                </div>
+
+            </div>
+
+        </div><!-- /content -->
+
+    </div><!-- /page -->
+
+</body>
+
+</html>
